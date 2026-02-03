@@ -1,0 +1,195 @@
+{% extends 'base2.html' %}
+
+{% block css %}
+<style>
+/* ================= FORM BOX WRAPPER ================= */
+
+.form-box {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ================= OUTER TITLE ================= */
+
+.form-box > h2 {
+  color: #f8fafc;
+  margin-bottom: 12px;
+  font-size: 22px;
+}
+
+/* ================= PLACEMENT FORM CARD ================= */
+
+.form-box form {
+  width: 100%;
+  max-width: 680px;
+  background-color: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 18px;
+  padding: 34px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.45);
+  transition: all 0.25s ease;
+  color: #f8fafc !important;
+}
+
+.form-box form:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.6);
+}
+
+/* ================= INNER TITLE ================= */
+
+.form-box form h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 26px;
+  color: #f8fafc;
+}
+
+/* ================= ROW GRID ================= */
+
+.form-box .row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* ================= FORM GROUP ================= */
+
+.form-box .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ================= LABELS ================= */
+
+.form-box label {
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #94a3b8;
+}
+
+/* ================= INPUTS & TEXTAREA ================= */
+
+.form-box input,
+.form-box textarea {
+  padding: 11px 12px;
+  border-radius: 10px;
+  background-color: #020617;
+  border: 1px solid #1e293b;
+  color: #f8fafc !important; /* override inline black */
+  font-size: 14px;
+  transition: all 0.25s ease;
+  resize: none;
+}
+
+/* Placeholder */
+.form-box input::placeholder,
+.form-box textarea::placeholder {
+  color: #64748b;
+}
+
+/* Focus */
+.form-box input:focus,
+.form-box textarea:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+}
+
+/* ================= BUTTON ================= */
+
+.form-box button {
+  width: 100%;
+  margin-top: 24px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  background-color: #020617;
+  color: #f8fafc;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.form-box button:hover {
+  border-color: #38bdf8;
+  color: #38bdf8;
+  box-shadow: 0 6px 18px rgba(56, 189, 248, 0.25);
+}
+
+/* ================= MOBILE FIX ================= */
+
+@media (max-width: 640px) {
+  .form-box .row {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+</style>
+{% endblock %}
+
+{% block sidebar %}
+
+<div class="form-box">
+  <h2>Create Placement Drive</h2>
+
+  <form style="color:black" action='{% url "add_placement_drive" %}' method="POST">
+  {% csrf_token %}
+  <h1>Add Placement Drive</h1>
+
+  <!-- ROW -->
+  <div class="row">
+    <div class="form-group">
+      <label>Company Name</label>
+      <input style="color:black" type="text" name="company_name" placeholder="e.g. TCS" required>
+    </div>
+
+    <div class="form-group">
+      <label>Job Role</label>
+      <input style="color:black" type="text" name="job_role" placeholder="Software Engineer" required>
+    </div>
+  </div>
+
+  <!-- ROW -->
+  <div class="row">
+    <div class="form-group">
+      <label>Eligibility</label>
+      <input style="color:black" type="text" name="eligibility" placeholder="CGPA ≥ 7.0" required>
+    </div>
+
+    <div class="form-group">
+      <label>CTC (LPA)</label>
+      <input style="color:black" type="number" step="0.01" name="ctc" placeholder="6.5" required>
+    </div>
+  </div>
+
+  <!-- FULL WIDTH -->
+  <div class="form-group">
+    <label>Job Description</label>
+    <textarea style="color:black" rows="4" name="job_description" placeholder="Enter job details" required></textarea>
+  </div>
+
+  <!-- ROW -->
+  <div class="row">
+    <div class="form-group">
+      <label>Drive Date</label>
+      <input style="color:black" type="date" name="drive_date" required>
+    </div>
+
+    <div class="form-group">
+      <label>Last Date to Apply</label>
+      <input style="color:black" type="date" name="last_date" required>
+    </div>
+  </div>
+
+  <button type="submit">Create Drive</button>
+</form>
+
+
+{% endblock %}

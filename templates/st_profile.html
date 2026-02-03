@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block css %}
+<style>
+/* ================= BASE ================= */
+
+body {
+  background-color: #0f172a;
+  color: #e5e7eb;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ================= WRAPPER ================= */
+
+.profile-wrapper {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px;
+}
+
+/* ================= PROFILE HEADER ================= */
+
+.profile-card {
+  background-color: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 30px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.profile-info h3 {
+  margin: 0;
+  font-size: 22px;
+  color: #f8fafc;
+}
+
+.profile-info p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+/* ================= SECTION TITLE ================= */
+
+.section-title {
+  font-size: 20px;
+  margin: 30px 0 15px;
+  color: #f8fafc;
+}
+
+/* ================= STATS GRID ================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+/* ================= STAT CARD ================= */
+
+.stat-card {
+  background-color: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.stat-card h2 {
+  margin: 0;
+  font-size: 30px;
+  color: #f8fafc;
+}
+
+.stat-card span {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+/* ================= FOOTER NOTE ================= */
+
+.profile-note {
+  margin-top: 35px;
+  text-align: center;
+  font-size: 13px;
+  color: #64748b;
+}
+</style>
+{% endblock %}
+
+{% block sidebar %}
+<div class="profile-wrapper">
+
+  <!-- PROFILE HEADER -->
+  <div class="profile-card">
+    <div class="profile-header">
+      <div class="avatar">
+        {{ user.first_name|slice:":1" }}
+      </div>
+      <div class="profile-info">
+        <h3>{{ user.get_full_name }}</h3>
+        <p>Student • {{ profile.department }}</p>
+        <p>{{ user.email }}</p>
+        <p>{{student.roll_no}}</p>
+<p>Year: {{ student.get_year_display }}</p>
+      </div>
+    </div> 
+  </div>
+
+ 
+{% endblock %}

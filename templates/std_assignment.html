@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+
+{% block css %}
+<style>
+/* ================= ASSIGNMENT SECTION TITLE ================= */
+
+h3.mb-4 {
+  color: #f8fafc;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* ================= ASSIGNMENT CARD ================= */
+
+.assignment-card {
+  background-color: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 18px;
+  padding: 26px;
+  height: 100%;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.45);
+  transition: all 0.25s ease;
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Hover effect like form-box */
+
+.assignment-card:hover {
+  transform: translateY(-6px);
+  border-color: #38bdf8;
+  box-shadow: 0 16px 36px rgba(56, 189, 248, 0.25);
+}
+
+/* ================= CARD TITLE ================= */
+
+.assignment-card h5 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #f8fafc;
+}
+
+/* ================= TEXT ================= */
+
+.assignment-card p {
+  font-size: 13.5px;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+
+/* Due date highlight */
+
+.assignment-card p strong {
+  color: #e5e7eb;
+}
+
+/* ================= BUTTON ================= */
+
+.assignment-card a.btn {
+  margin-top: 14px;
+  border-radius: 12px;
+  padding: 10px;
+  border: 1px solid #1e293b;
+  background-color: #020617;
+  color: #f8fafc;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.assignment-card a.btn:hover {
+  border-color: #38bdf8;
+  color: #38bdf8;
+  box-shadow: 0 6px 18px rgba(56, 189, 248, 0.25);
+}
+
+</style>
+{% endblock %}
+
+{% block sidebar %}
+
+<h3 class="mb-4">📘 Assignments</h3>
+
+<div class="row g-4">
+
+  {% for a in assign %}
+  <div class="col-md-6 col-lg-4">
+
+    <div class="assignment-card glass">
+      
+      <h5 class="mb-2">{{ a.subject }}</h5>
+
+      <p class="small text-light">
+        <strong>Assignment #:</strong> {{ a.assignment_number }}
+      </p>
+
+      <p class="small text-light">
+        {{ a.description|truncatechars:80 }}
+      </p>
+
+      <p class="small">
+        📅 <strong>Due:</strong> {{ a.due_date }}
+      </p>
+
+      {% if a.file %}
+      <a href="{{ a.file.url }}" class="btn btn-sm btn-outline-light w-100" target="_blank">
+        View Assignment 
+      </a>
+      {% endif %}
+
+    </div>
+
+  </div>
+  {% empty %}
+    <p>No assignments available.</p>
+  {% endfor %}
+
+</div>
+
+{% endblock %}

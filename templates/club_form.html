@@ -1,0 +1,148 @@
+{% extends 'base2.html'%}
+
+{% block css %}
+<style>
+
+/* ================= CLUB FORM CARD ================= */
+
+#clubForm {
+  max-width: 560px;
+  margin: 45px auto;
+  background-color: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.45);
+  transition: all 0.25s ease;
+  color: #f8fafc !important;
+}
+
+#clubForm:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.6);
+}
+
+/* ================= TITLE ================= */
+
+#clubForm h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 26px;
+  color: #f8fafc;
+}
+
+/* ================= FORM GROUP ================= */
+
+#clubForm .form-group {
+  margin-bottom: 16px;
+}
+
+/* ================= LABELS ================= */
+
+#clubForm label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #94a3b8;
+}
+
+/* ================= INPUTS & TEXTAREA ================= */
+
+#clubForm input,
+#clubForm textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 10px;
+  background-color: #020617;
+  border: 1px solid #1e293b;
+  color: #f8fafc !important; /* override inline black */
+  font-size: 14px;
+  transition: all 0.25s ease;
+  resize: none;
+}
+
+/* Placeholder */
+#clubForm input::placeholder,
+#clubForm textarea::placeholder {
+  color: #64748b;
+}
+
+/* Focus */
+#clubForm input:focus,
+#clubForm textarea:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+}
+
+/* File input */
+#clubForm input[type="file"] {
+  cursor: pointer;
+}
+
+/* ================= BUTTON ================= */
+
+#clubForm button {
+  width: 100%;
+  margin-top: 22px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  background-color: #020617;
+  color: #f8fafc !important;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+#clubForm button:hover {
+  border-color: #38bdf8;
+  color: #38bdf8 !important;
+  box-shadow: 0 6px 18px rgba(56, 189, 248, 0.25);
+}
+
+</style>
+{% endblock  %}
+
+{% block sidebar %}
+
+      <form style="color:black" id="clubForm" method="POST" enctype="multipart/form-data"
+      action="{% url 'add_club' %}">
+      {% csrf_token %}
+        <h2>Add New Club</h2>
+
+    <div class="form-group">
+      <label>Club Name</label>
+      <input style="color:black" type="text" placeholder="Enter club name" name = "name"required>
+    </div>
+
+    <div class="form-group">
+      <label>Club Category</label>
+      <input style="color:black" type="text" placeholder="e.g. Technical, Cultural, Sports" name ="category" required>
+    </div>
+
+    <div class="form-group">
+      <label>Club Description</label>
+      <textarea style="color:black" rows="4" placeholder="Describe the club" name ="description"required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Coordinator Name</label>
+      <input style="color:black" type="text" placeholder="Enter coordinator name" name ="coordinator_name" required>
+    </div>
+
+    <div class="form-group">
+      <label>Contact Email</label>
+      <input style="color:black" type="email" placeholder="Enter email address" name ="contact_email"required>
+    </div>
+
+    <div class="form-group">
+      <label>Upload Club Logo</label>
+      <input style="color:black" type="file" accept="image/*" name="logo" required>
+    </div>
+
+    <button style="color:black" type="submit">Create Club</button>
+
+  </form>
+{% endblock  %}

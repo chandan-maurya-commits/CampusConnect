@@ -1,0 +1,116 @@
+{% extends 'base.html'%}
+
+{% block css %}
+<style>
+/* ================= EVENTS TITLE ================= */
+
+h1 {
+  color: #f8fafc;
+  font-weight: 800;
+  margin-bottom: 24px;
+  letter-spacing: 0.4px;
+}
+
+/* ================= EVENT CONTAINER ================= */
+
+.event-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+/* ================= EVENT CARD ================= */
+
+.event-card {
+  background-color: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 18px;
+  padding: 26px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.45);
+  transition: all 0.25s ease;
+  color: #f8fafc;
+}
+
+/* Hover like form-box */
+
+.event-card:hover {
+  transform: translateY(-6px);
+  border-color: #38bdf8;
+  box-shadow: 0 16px 36px rgba(56, 189, 248, 0.25);
+}
+
+/* ================= EVENT TITLE ================= */
+
+.event-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #f8fafc;
+}
+
+/* ================= TEXT ================= */
+
+.event-card p {
+  font-size: 13.5px;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+
+.event-card p strong {
+  color: #e5e7eb;
+}
+
+/* ================= POSTER IMAGE ================= */
+
+.event-card img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-top: 14px;
+  border: 1px solid #1e293b;
+}
+
+/* ================= REMOVE HR ================= */
+
+.event-container hr {
+  display: none;
+}
+
+</style>
+{% endblock %}
+
+
+
+{% block sidebar %}
+
+<h1>All Events</h1>
+
+<div class="event-container">
+  {% for event in events %}
+    <div class="event-card">
+      <h3>{{ event.title }}</h3>
+
+      <p><strong>Category:</strong> {{ event.category }}</p>
+      <p>{{ event.description }}</p>
+
+      <p>
+        📅 <strong>Date:</strong> {{ event.event_date }}
+      </p>
+
+      <p>
+        👤 <strong>Organizer:</strong> {{ event.organizer_name }}
+      </p>
+
+      {% if event.poster %}
+        <img src="{{ event.poster.url }}" alt="Event Poster" width="200">
+      {% endif %}
+    </div>
+    <hr>
+  {% empty %}
+    <p>No events available.</p>
+  {% endfor %}
+</div>
+
+{% endblock %}
+

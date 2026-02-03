@@ -1,0 +1,303 @@
+{% extends 'base2.html' %} {% block css %}
+<style>
+  /* ================= BASE ================= */
+
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    font-family: "Segoe UI", sans-serif;
+    background-color: #0f172a;
+    color: #e5e7eb;
+    padding: 30px;
+    overflow-y: auto;
+  }
+
+  /* ================= CONTENT SCROLL ================= */
+
+  .content {
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+
+  .content::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .content::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+  }
+
+  /* ================= HEADER ================= */
+
+  .dashboard-header {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .subject-badge {
+    background-color: #1e40af;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+  }
+
+  /* ================= TITLES ================= */
+
+  .section-title {
+    font-size: 20px;
+    margin: 30px 0 15px;
+    color: #f8fafc;
+  }
+
+  /* ================= GRID ================= */
+
+  .assignment-grid,
+  .club-grid,
+  .placement-grid,
+  .event-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  /* ================= COMMON CARD ================= */
+
+  .assignment-card,
+  .club-card,
+  .placement-card,
+  .event-card {
+    background-color: #020617;
+    border: 1px solid #1e293b;
+    border-radius: 10px;
+    padding: 16px;
+    transition: all 0.25s ease;
+  }
+
+  .assignment-card:hover,
+  .club-card:hover,
+  .placement-card:hover,
+  .event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  }
+
+  /* ================= ASSIGNMENTS ================= */
+
+  .assignment-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .assign-no {
+    background: #1e293b;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+
+  .due-date {
+    color: #facc15;
+  }
+
+  /* ================= CLUBS ================= */
+
+  .club-name {
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .club-description {
+    font-size: 14px;
+    color: #cbd5f5;
+    margin: 8px 0;
+  }
+
+  .club-info {
+    font-size: 13px;
+    color: #94a3b8;
+    border-top: 1px solid #1e293b;
+    padding-top: 8px;
+  }
+
+  /* ================= PLACEMENTS ================= */
+
+  .placement-card strong {
+    color: #22c55e;
+  }
+
+  /* ================= EMPTY ================= */
+
+  .empty-state {
+    text-align: center;
+    padding: 20px;
+    color: #64748b;
+    border: 1px dashed #334155;
+    border-radius: 10px;
+  }
+ /* ================= PROFILE HEADER ================= */
+
+.profile-card {
+  background: linear-gradient(135deg, #020617, #020617);
+  border: 1px solid #1e293b;
+  border-radius: 14px;
+  padding: 18px 22px;
+}
+
+.profile-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Avatar circle */
+.avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Name */
+.profile-info h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+/* Role + department */
+.profile-meta {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #cbd5f5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-meta .role {
+  background: rgba(37, 99, 235, 0.15);
+  color: #93c5fd;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.profile-meta .dept {
+  color: #a5b4fc;
+}
+
+.profile-meta .dot {
+  opacity: 0.6;
+}
+
+</style>
+{% endblock %} {% block sidebar %}
+<div id="content" class="content">
+  <div class="dashboard-header profile-card">
+  <div class="profile-left">
+    <div class="avatar">
+      {{ profile.user.first_name|slice:":1" }}
+    </div>
+
+    <div class="profile-info">
+      <h3>Welcome, {{ profile.user.first_name }} 👋</h3>
+
+      <div class="profile-meta">
+        <span class="role"> Faculty </span>
+        <span class="dot">•</span>
+        <span class="dept">{{ profile.department }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- ASSIGNMENTS -->
+  <h2 class="section-title">Assignments Added by You</h2>
+
+  {% if assignments %}
+  <div class="assignment-grid">
+    {% for a in assignments %}
+    <div class="assignment-card">
+      <div class="assignment-top">
+        <span>{{ a.subject }}</span>
+        <span class="assign-no">#{{ a.assignment_number }}</span>
+      </div>
+      <p class="due-date">Due: {{ a.due_date }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">No assignments added yet.</div>
+  {% endif %}
+
+  <!-- CLUBS -->
+  <h2 class="section-title">Clubs Added by You</h2>
+
+  {% if clubs %}
+  <div class="club-grid">
+    {% for club in clubs %}
+    <div class="club-card">
+      <h4 class="club-name">{{ club.name }}</h4>
+      <p class="club-description">{{ club.description }}</p>
+      <div class="club-info">
+        <div>👤 {{ club.coordinator_name }}</div>
+        <div>✉️ {{ club.contact_email }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">No clubs added yet.</div>
+  {% endif %}
+
+  <!-- PLACEMENTS -->
+  <h2 class="section-title">My Placement Drives</h2>
+
+  {% if placements %}
+  <div class="placement-grid">
+    {% for p in placements %}
+    <div class="placement-card">
+      <h4>{{ p.company_name }}</h4>
+      <p><strong>Role:</strong> {{ p.job_role }}</p>
+      <p><strong>CTC:</strong> {{ p.ctc }} LPA</p>
+      <p><strong>Last Date:</strong> {{ p.last_date }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">No placements added yet.</div>
+  {% endif %}
+
+  <!-- EVENTS -->
+  <h2 class="section-title">My Events</h2>
+
+  {% if events %}
+  <div class="event-grid">
+    {% for e in events %}
+    <div class="event-card">
+      <h4>{{ e.title }}</h4>
+      <p>{{ e.category }}</p>
+      <p>Date: {{ e.event_date }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">No events created yet.</div>
+  {% endif %}
+</div>
+{% endblock %}

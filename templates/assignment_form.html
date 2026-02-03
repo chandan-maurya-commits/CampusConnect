@@ -1,0 +1,131 @@
+{% extends 'base2.html' %}
+
+
+{% block css %} 
+  <style>
+/* ================= ASSIGNMENT FORM CARD ================= */
+
+#assignmentForm {
+  max-width: 520px;
+  margin: 40px auto;
+  background-color: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.45);
+  transition: all 0.25s ease;
+  color: #f8fafc !important;
+}
+
+#assignmentForm:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.6);
+}
+
+/* ================= TITLE ================= */
+
+#assignmentForm h3 {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 24px;
+  color: #f8fafc;
+}
+
+/* ================= LABELS ================= */
+
+#assignmentForm label {
+  display: block;
+  font-size: 13px;
+  margin: 14px 0 6px;
+  color: #94a3b8;
+}
+
+/* ================= INPUTS & TEXTAREA ================= */
+
+#assignmentForm input,
+#assignmentForm textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 10px;
+  background-color: #020617;
+  border: 1px solid #1e293b;
+  color: #f8fafc !important; /* override inline black */
+  font-size: 14px;
+  transition: all 0.25s ease;
+  resize: none;
+}
+
+/* Placeholder */
+#assignmentForm input::placeholder {
+  color: #64748b;
+}
+
+/* Focus */
+#assignmentForm input:focus,
+#assignmentForm textarea:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+}
+
+/* File input cursor */
+#assignmentForm input[type="file"] {
+  cursor: pointer;
+}
+
+/* ================= BUTTON ================= */
+
+#assignmentForm button {
+  width: 100%;
+  margin-top: 22px;
+  padding: 13px;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  background-color: #020617;
+  color: #f8fafc;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+#assignmentForm button:hover {
+  border-color: #38bdf8;
+  color: #38bdf8;
+  box-shadow: 0 6px 18px rgba(56, 189, 248, 0.25);
+}
+
+</style>
+{% endblock  %}
+
+{% block sidebar %}
+    
+  
+ <form style="color:black" id="assignmentForm"
+      method="POST"
+      action="{% url 'add_assignment' %}"
+      enctype="multipart/form-data">
+      {% csrf_token %}
+
+  <h3>Add New Assignment</h3>
+
+  <label>Assignment Subject</label>
+  <input style="color:black" type="text" name="subject" placeholder='eg:ML'required>
+
+  <label>Assignment Number</label>
+  <input style="color:black" type="number" name="assignment_number" required>
+
+  <label>Description</label>
+  <textarea style="color:black"  name="description" rows="4" required></textarea>
+
+  <label>Due Date</label>
+  <input style="color:black" type="date" name="due_date" required>
+
+  <label>Upload File</label>
+  <input style="color:black" type="file" name="file" required>
+
+  <button type="submit">Submit Assignment</button>
+</form>
+      
+{% endblock  %}
+

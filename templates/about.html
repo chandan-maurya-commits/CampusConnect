@@ -1,0 +1,263 @@
+{% extends 'base2.html' %}
+
+{% block css %}
+<style>
+/* ================= BASE ================= */
+
+body {
+  background-color: #0f172a;
+  color: #e5e7eb;
+}
+
+/* ================= WRAPPER ================= */
+
+.about-wrapper {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px;
+}
+
+/* ================= HEADER ================= */
+
+.about-header {
+  margin-bottom: 40px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.about-header h2 {
+  font-size: 28px;
+  color: #f8fafc;
+  margin-bottom: 10px;
+}
+
+.about-header p {
+  color: #94a3b8;
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+/* ================= GRID ================= */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+/* ================= CARD ================= */
+
+.about-card {
+  background-color: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 14px;
+  padding: 18px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.about-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+/* ================= CARD HEADER ================= */
+
+.about-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.about-icon {
+  font-size: 24px;
+}
+
+.about-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+/* ================= CARD CONTENT ================= */
+
+.about-content {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #cbd5f5;
+  line-height: 1.7;
+  display: none;
+}
+
+/* ================= ACTIVE ================= */
+
+.about-card.active {
+  border-color: #ffffff;
+  background: linear-gradient(
+    180deg,
+    rgba(167,139,250,0.08),
+    #020617
+  );
+}
+
+.about-card.active .about-content {
+  display: block;
+}
+
+/* ================= FOOTER ================= */
+
+.about-footer {
+  margin-top: 50px;
+  text-align: center;
+  color: #64748b;
+  font-size: 14px;
+}
+</style>
+{% endblock %}
+
+{% block sidebar %}
+<div class="about-wrapper">
+
+  <!-- HEADER -->
+  <div class="about-header">
+    <h2>About CampusConnect</h2>
+    <p>
+      CampusConnect is a centralized academic management platform developed to
+streamline campus operations and reduce dependency on manual processes.
+It integrates academic tasks such as assignment management, club and
+event coordination, and placement drive updates into one unified system.
+By providing role-based access and personalized dashboards for students,
+faculty, and coordinators, CampusConnect enhances transparency,
+communication, and collaboration across the entire institution.
+
+    </p>
+  </div>
+
+  <!-- CARDS -->
+  <!-- CARDS -->
+<div class="about-grid">
+
+  <div class="about-card">
+    <div class="about-card-header">
+      <div class="about-icon">🎓</div>
+      <div class="about-title">Who We Are</div>
+    </div>
+    <div class="about-content">
+      CampusConnect is a unified academic management platform designed
+      specifically for colleges and universities to reduce manual work
+      and improve communication across departments.
+    </div>
+  </div>
+
+  <div class="about-card">
+    <div class="about-card-header">
+      <div class="about-icon">🧭</div>
+      <div class="about-title">Purpose of CampusConnect</div>
+    </div>
+    <div class="about-content">
+      Our goal is to centralize academic activities like assignments,
+      clubs, events, and placements into a single secure system
+      accessible anytime by authorized users.
+    </div>
+  </div>
+
+  <div class="about-card">
+    <div class="about-card-header">
+      <div class="about-icon">📘</div>
+      <div class="about-title">Assignment Management</div>
+    </div>
+    <div class="about-content">
+      Faculty members can create, manage, and update assignments with
+      subjects, deadlines, and attached resources, ensuring clarity
+      and accountability for students.
+    </div>
+  </div>
+
+  <div class="about-card">
+    <div class="about-card-header">
+      <div class="about-icon">🎯</div>
+      <div class="about-title">Clubs & Student Activities</div>
+    </div>
+    <div class="about-content">
+      Coordinators manage clubs, leadership roles, and activities while
+      students can explore and engage in extracurricular opportunities
+      without missing announcements.
+    </div>
+  </div>
+
+  <div class="about-card">
+    <div class="about-card-header">
+      <div class="about-icon">🎉</div>
+      <div class="about-title">Event Management</div>
+    </div>
+    <div class="about-content">
+      Events such as workshops, seminars, and competitions are listed
+      with schedules, categories, and details for maximum visibility
+      and participation.
+    </div>
+  </div>
+
+  <div class="about-card">
+    <div class="about-card-header">
+      <div class="about-icon">💼</div>
+      <div class="about-title">Placement & Career Support</div>
+    </div>
+    <div class="about-content">
+      Placement drives include company details, job roles, salary
+      packages, eligibility criteria, and deadlines — keeping students
+      career-ready.
+    </div>
+  </div>
+
+  <div class="about-card">
+    <div class="about-card-header">
+      <div class="about-icon">👤</div>
+      <div class="about-title">Profile & Dashboard System</div>
+    </div>
+    <div class="about-content">
+      Every user has a personalized dashboard displaying relevant
+      information, recent activity, and contributions made within
+      the platform.
+    </div>
+  </div>
+
+  <div class="about-card">
+    <div class="about-card-header">
+      <div class="about-icon">🔐</div>
+      <div class="about-title">Security & Role-Based Access</div>
+    </div>
+    <div class="about-content">
+      CampusConnect enforces strict role-based access control ensuring
+      data privacy, secure actions, and controlled permissions
+      for students, faculty, and coordinators.
+    </div>
+  </div>
+
+  <div class="about-card">
+    <div class="about-card-header">
+      <div class="about-icon">⚙️</div>
+      <div class="about-title">Built for Scalability</div>
+    </div>
+    <div class="about-content">
+      Designed using modern web technologies, CampusConnect can scale
+      across departments, semesters, and institutions with minimal
+      maintenance.
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+const aboutCards = document.querySelectorAll(".about-card");
+
+aboutCards.forEach(card => {
+  card.addEventListener("click", () => {
+    aboutCards.forEach(c => {
+      if (c !== card) c.classList.remove("active");
+    });
+    card.classList.toggle("active");
+  });
+});
+</script>
+{% endblock %}

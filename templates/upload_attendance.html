@@ -1,0 +1,21 @@
+{% extends 'base2.html' %}
+
+{% block sidebar %}
+<div class="container mt-5">
+  <div class="card p-4" style="background:#020617;border:1px solid #1e293b;color:#e5e7eb">
+    <h4 class="mb-3">📤 Upload Attendance CSV</h4>
+
+    {% for message in messages %}
+      <div class="alert alert-info">{{ message }}</div>
+    {% endfor %}
+
+    <form method="POST" action="{% url 'upload_attendance' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <input type="file" name="csv_file" accept=".csv" required>
+
+    <button type="submit">Upload Attendance</button>
+</form>
+  </div>
+</div>
+{% endblock %}

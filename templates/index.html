@@ -1,0 +1,441 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Connect | Portal</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* ---------------- VARIABLES ---------------- */
+        :root {
+            /* We will use these for panels, but body uses a gradient now */
+            --bg-dark: #1e252f;
+            --bg-panel: rgba(38, 53, 68, 0.8); /* Made transparent for shine effect */
+            --accent: #3b82f6;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        /* ---------------- GLOBAL ---------------- */
+        body {
+            margin: 0;
+            font-family: "Roboto", sans-serif;
+            color: var(--text-main);
+            overflow-x: hidden;
+            
+            /* --- ANIMATED SHINING BACKGROUND --- */
+            /* 1. Deep dark colors that shift */
+            background: linear-gradient(-45deg, #111827, #1e252f, #2d3b4e, #0f172a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            
+            /* 2. Min-height ensures it covers full screen on mobile */
+            min-height: 100vh; 
+        }
+
+        /* The animation that moves the background */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ---------------- ANIMATIONS ---------------- */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ---------------- NAVBAR ---------------- */
+        nav {
+            background: rgba(15, 23, 42, 0.8); /* Slightly darker for contrast */
+            backdrop-filter: blur(15px);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ---------------- HERO SECTION ---------------- */
+        .hero {
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 60px;
+            position: relative;
+        }
+
+        /* Add a faint pattern overlay for texture */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            animation: fadeUp 0.8s ease-out both; 
+            text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+        }
+        
+        .hero h1 span {
+            color: var(--accent);
+            /* Optional: Make the text span shine too */
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .lead {
+            color: var(--text-muted);
+            font-size: 20px;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            line-height: 1.6;
+            animation: fadeUp 0.8s ease-out 0.2s both; 
+        }
+
+        .hero-btns {
+            animation: fadeUp 0.8s ease-out 0.4s both; 
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 35px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: #2563eb;
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.6);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--text-muted);
+            color: var(--text-main);
+            background: rgba(0,0,0,0.2);
+        }
+
+        .btn-outline:hover {
+            border-color: #fff;
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        /* ---------------- FEATURES ---------------- */
+        .features-section {
+            padding: 80px 0;
+            /* Semi-transparent so the moving gradient shows slightly through at bottom */
+            background: rgba(0, 0, 0, 0.2); 
+            backdrop-filter: blur(5px);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .section-title p {
+            color: var(--text-muted);
+        }
+
+        .card-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-panel);
+            padding: 40px 25px;
+            border-radius: 16px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            
+            /* Glassmorphism effect */
+            backdrop-filter: blur(10px);
+            
+            opacity: 0; 
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.6s; }
+        .feature-card:nth-child(2) { animation-delay: 0.7s; }
+        .feature-card:nth-child(3) { animation-delay: 0.8s; }
+        .feature-card:nth-child(4) { animation-delay: 0.9s; }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2); /* Blue glow */
+            background: rgba(38, 53, 68, 0.95);
+        }
+
+        .feature-img {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 20px;
+            object-fit: contain;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
+            transition: transform 0.4s ease;
+        }
+        
+        .feature-card:hover .feature-img {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ---------------- FOOTER ---------------- */
+        footer {
+            background: rgba(17, 21, 28, 0.9);
+            color: var(--text-muted);
+            text-align: center;
+            padding: 30px 0;
+            font-size: 14px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* ---------------- RESPONSIVE ---------------- */
+        .navbar-toggler {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .navbar-toggler:active {
+            transform: scale(0.9);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: #1e252f;
+                position: absolute;
+                top: 70px;
+                right: 5%;
+                width: 200px;
+                padding: 20px;
+                border-radius: 12px;
+                box-shadow: var(--shadow);
+                animation: fadeUp 0.3s ease-out;
+                z-index: 999;
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .navbar-toggler {
+                display: block;
+            }
+            .hero h1 {
+                font-size: 36px;
+            }
+            .hero {
+                height: auto;
+                padding: 120px 0 60px 0;
+                
+            }
+        }
+        .hero .container .h{
+            margin-bottom: -40px;
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="container navbar">
+        <a class="navbar-brand" href="#">CampusConnect</a>
+        <button class="navbar-toggler" id="navToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="nav-links" id="navMenu">
+            <a href="{% url 'log' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="container">
+        <h1 class='h'>A</h1>
+        <h1>Centralized <br> <span>Academic Dashboard</span></h1>
+        <p class="lead">
+            Manage attendance, track results, and coordinate events efficiently. 
+            A unified platform for Faculty and Students.
+        </p>
+
+        <div class="hero-btns">
+            <a href="{% url 'log' %}" class="btn btn-primary">Login to Portal</a>
+            <a href="{% url 'register' %}" class="btn btn-outline">New Registration</a>
+        </div>
+    </div>
+</section>
+
+<section class="features-section">
+    <div class="container">
+        <div class="section-title">
+            <h2 class="fw-bold">Everything in One Place</h2>
+            <p>Streamlining academic and extracurricular management.</p>
+        </div>
+
+        <div class="card-row">  
+
+            <div class="feature-card">
+                <img src="{% static 'images/atten.webp' %}" class="feature-img" alt="Attendance">
+                <h3>Track Attendance</h3>
+                <p>Real-time attendance tracking for students and easy marking for faculty.</p>
+            </div>
+
+            <div class="feature-card">
+                 <img src="{% static 'images/result.webp' %}" class="feature-img" alt="Results">
+                <h3>View Results</h3>
+                <p>Instant access to semester marks, assignments, and performance analytics.</p>
+            </div>
+
+            <div class="feature-card">
+                 <img src="{% static 'images/clubs.webp' %}" class="feature-img" alt="Clubs">
+                <h3>Campus Clubs</h3>
+                <p>Join clubs, manage memberships, and participate in extracurriculars.</p>
+            </div>
+
+            <div class="feature-card">
+                 <img src="{% static 'images/events.webp' %}" class="feature-img" alt="Events">
+                <h3>Events & Drives</h3>
+                <p>Stay updated on college events, workshops, and placement drives.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 CampusConnect. Designed for Efficiency.</p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById("navToggle").addEventListener("click", () => {
+        document.getElementById("navMenu").classList.toggle("show");
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+{% extends 'base2.html' %}
+
+
+{% block css %}
+<style>
+/* ================= BASE ================= */
+
+body {
+  background-color: #0f172a;
+  color: #e5e7eb;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ================= PROFILE CARD ================= */
+
+.profile-card {
+  background-color: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 18px;
+  padding: 34px;
+  box-shadow: 0 14px 32px rgba(0,0,0,0.6);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn { 
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= HEADER ================= */
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.avatar {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #334155, #475569);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.profile-header h3 {
+  margin: 0;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.profile-header small {
+  color: #94a3b8;
+}
+
+/* ================= INFO ================= */
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid #1e293b;
+  font-size: 15px;
+}
+
+.info-item i {
+  font-size: 20px;
+  color: #9ca3af;
+}
+
+/* ================= STATS ================= */
+
+.stats {
+  margin-top: 32px;
+}
+
+.stats h5 {
+  color: #f1f5f9;
+  margin-bottom: 14px;
+}
+
+.stat-card {
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  border-color: #475569;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.45);
+}
+
+.stat-card i {
+  font-size: 26px;
+  color: #9ca3af;
+}
+
+.stat-card h4 {
+  margin-top: 8px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.stat-card span {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+/* ================= BUTTON ================= */
+
+.back-btn {
+  margin-top: 34px;
+  border-radius: 30px;
+  padding: 10px 30px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #e5e7eb;
+}
+
+.back-btn:hover {
+  background: #334155;
+}
+<style>
+{% endblock %}
+
+{% block sidebar %}
+<div class="container d-flex justify-content-center">
+  <div class="col-lg-8 col-md-10 mt-4">
+
+    <div class="profile-card">
+
+      <!-- HEADER -->
+      <div class="profile-header">
+        <div class="avatar">
+          {{ user.first_name|slice:":1" }}
+        </div>
+        <div>
+          <h3>{{ user.get_full_name }}</h3>
+          <small>Faculty • {{ profile.department }}</small>
+        </div>
+      </div>
+
+      <!-- INFO -->
+      <div class="info-item">
+        <i class="bi bi-envelope-fill"></i>
+        <span><strong>Email:</strong> {{ user.email }}</span>
+      </div>
+
+      <div class="info-item">
+        <i class="bi bi-person-badge-fill"></i>
+        <span><strong>Role:</strong> {{ profile.role }}</span>
+      </div>
+
+      <div class="info-item">
+        <i class="bi bi-building"></i>
+        <span><strong>Department:</strong> {{ profile.department }}</span>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats">
+        <h5>📊 My Activity</h5>
+
+        <div class="row g-3">
+          <div class="col-md-3 col-6">
+            <div class="stat-card">
+              <i class="bi bi-journal-text"></i>
+              <h4>{{ assignments_count }}</h4>
+              <span>Assignments</span>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-6">
+            <div class="stat-card">
+              <i class="bi bi-people-fill"></i>
+              <h4>{{ clubs_count }}</h4>
+              <span>Clubs</span>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-6">
+            <div class="stat-card">
+              <i class="bi bi-calendar-event"></i>
+              <h4>{{ events_count }}</h4>
+              <span>Events</span>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-6">
+            <div class="stat-card">
+              <i class="bi bi-briefcase-fill"></i>
+              <h4>{{ placements_count }}</h4>
+              <span>Placements</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <a href="{% url 'coordinator_dashboard' %}" class="btn btn-primary back-btn">
+          ⬅ Back to Dashboard
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,291 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | Campus Connect</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* ---------------- VARIABLES (Consistent Theme) ---------------- */
+    :root {
+        --bg-dark: #1e252f;
+        --bg-panel: #263544;
+        --input-bg: #111827;
+        --accent: #3b82f6;
+        --accent-hover: #2563eb;
+        --text-main: #ffffff;
+        --text-muted: #94a3b8;
+        --border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    body {
+        background-color: var(--bg-dark);
+        background-image: radial-gradient(circle at center, #2d3b4e 0%, var(--bg-dark) 100%);
+        min-height: 100vh;
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0; /* Add padding for small screens */
+    }
+
+    .container {
+        width: 100%;
+        max-width: 500px; /* Slightly wider than login for the grid layout */
+        padding: 10px;
+    }
+
+    .card {
+        background: var(--bg-panel);
+        border-radius: 16px;
+        padding: 30px 35px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        border: 1px solid var(--border-color);
+        color: var(--text-main);
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    h3 {
+        font-family: "Poppins", sans-serif;
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 26px;
+    }
+
+    /* ---------------- FORM STYLES ---------------- */
+    .form-label {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-muted);
+        margin-bottom: 6px;
+        display: block;
+        margin-left: 4px;
+    }
+
+    .form-control, .form-select {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        background: var(--input-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-main);
+        outline: none;
+        transition: 0.3s;
+        font-family: "Roboto", sans-serif;
+        margin-bottom: 15px;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    /* Custom Arrow for Select Boxes */
+    .form-select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.7-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-position: right 15px top 50%;
+        background-size: 10px auto;
+        cursor: pointer;
+    }
+
+    /* Grid Layout for Dropdowns */
+    .row {
+        display: flex;
+        gap: 15px;
+    }
+    .col {
+        flex: 1;
+    }
+
+    /* ---------------- BUTTON ---------------- */
+    button {
+        width: 100%;
+        padding: 14px;
+        background-color: var(--accent);
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 10px;
+        font-family: "Poppins", sans-serif;
+    }
+
+    button:hover {
+        background-color: var(--accent-hover);
+        transform: translateY(-2px);
+    }
+
+    /* ---------------- FOOTER LINK ---------------- */
+    .footer-text {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+        color: var(--text-muted);
+    }
+
+    .footer-text a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .footer-text a:hover {
+        text-decoration: underline;
+    }
+
+    /* ---------------- HIDDEN DIV ANIMATION ---------------- */
+    #rollDiv, #subjectDiv {
+        animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+    <h3 class="text-center">Create Account</h3>
+
+    <form method="POST" action="{% url 'register' %}">
+      {% csrf_token %}
+
+      <div>
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-control" name="name" placeholder="John Doe" required>
+      </div>
+
+      <div>
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-control" name="email" placeholder="student@college.edu" required>
+      </div>
+
+      <div>
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" name="password" placeholder="••••••••" required>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label class="form-label">Register As</label>
+          <select class="form-select" name="role" id="role" required onchange="toggleFields()">
+            <option value="" disabled selected>Role</option>
+            <option value="Student">Student</option>
+            <option value="Coordinator">Coordinator</option>
+          </select>
+        </div>
+        
+        <div class="col">
+          <label class="form-label">Department</label>
+          <select class="form-select" name="department" required>
+            <option value="" disabled selected>Dept</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="ME">ME</option>
+            <option value="CE">CE</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="rollDiv" style="display:none;">
+        <label class="form-label">Roll Number</label>
+        <input type="text" class="form-control" name="roll_no" placeholder="e.g. 2100520100">
+      </div>
+      <div id="yearDiv" style="display:none;">
+  <label class="form-label">Year</label>
+  <select class="form-select" name="year">
+    <option value="" disabled selected>Select Year</option>
+    <option value="1">1st Year</option>
+    <option value="2">2nd Year</option>
+    <option value="3">3rd Year</option>
+    <option value="4">4th Year</option>
+  </select>
+</div>
+
+
+      <div id="subjectDiv" style="display:none;">
+        <label class="form-label">Subject Specialization</label>
+        <select class="form-select" name="subject_code">
+          <option value="" disabled selected>Select Subject</option>
+          <option value="ML-101">Machine Learning - 101</option>
+          <option value="DA-102">Data Analytics - 102</option>
+          <option value="DAA-103">DAA - 103</option>
+          <option value="WT-104">Web Technology - 104</option>
+          <option value="ITCS-105">ITCS - 105</option>
+          <option value="DBMS-106">DBMS - 106</option>
+        </select>
+      </div>
+
+      <button type="submit">Complete Registration</button>
+    </form>
+
+    <p class="footer-text">
+      Already have an account? <a href="{% url 'log' %}">Login</a>
+    </p>
+  </div>
+</div>
+
+<script>
+function toggleFields() {
+    const role = document.getElementById("role").value;
+
+    const rollDiv = document.getElementById("rollDiv");
+    const subjectDiv = document.getElementById("subjectDiv");
+    const yearDiv = document.getElementById("yearDiv");
+
+    const rollInput = document.querySelector('input[name="roll_no"]');
+    const subjectSelect = document.querySelector('select[name="subject_code"]');
+    const yearSelect = document.querySelector('select[name="year"]');
+
+    if (role === "Student") {
+        rollDiv.style.display = "block";
+        yearDiv.style.display = "block";
+        subjectDiv.style.display = "none";
+
+        rollInput.required = true;
+        yearSelect.required = true;
+        subjectSelect.required = false;
+    } 
+    else if (role === "Coordinator") {
+        subjectDiv.style.display = "block";
+        rollDiv.style.display = "none";
+        yearDiv.style.display = "none";
+
+        subjectSelect.required = true;
+        rollInput.required = false;
+        yearSelect.required = false;
+    } 
+    else {
+        rollDiv.style.display = "none";
+        subjectDiv.style.display = "none";
+        yearDiv.style.display = "none";
+
+        rollInput.required = false;
+        subjectSelect.required = false;
+        yearSelect.required = false;
+    }
+}
+</script>
+
+
+</body>
+</html>

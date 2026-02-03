@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Connect | Login</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* ---------------- VARIABLES (Matching Dashboard) ---------------- */
+        :root {
+            --bg-dark: #1e252f;       /* Main Background */
+            --bg-panel: #263544;      /* Card Background */
+            --input-bg: #111827;      /* Darker input background */
+            --accent: #3b82f6;        /* Bright Blue */
+            --accent-hover: #2563eb;  /* Darker Blue */
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ---------------- GLOBAL STYLES ---------------- */
+        body {
+            background-color: var(--bg-dark);
+            /* Subtle radial gradient to give depth */
+            background-image: radial-gradient(circle at center, #2d3b4e 0%, var(--bg-dark) 100%);
+            height: 100vh;
+            margin: 0;
+            font-family: "Roboto", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-main);
+        }
+
+        /* ---------------- LOGIN WRAPPER ---------------- */
+        .login-wrapper {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: var(--bg-panel);
+            border-radius: 16px;
+            padding: 40px 35px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        /* ---------------- TYPOGRAPHY ---------------- */
+        .login-card h3 {
+            font-family: "Poppins", sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 5px 0;
+            color: var(--text-main);
+        }
+
+        .login-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        /* ---------------- FORM ELEMENTS ---------------- */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: block;
+            margin-left: 5px;
+        }
+
+        .input-box,
+        .select-box {
+            width: 100%;
+            box-sizing: border-box; /* Ensures padding doesn't break width */
+            padding: 14px 16px;
+            border-radius: 8px;
+            font-size: 15px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: "Roboto", sans-serif;
+        }
+
+        /* Input Focus State */
+        .input-box:focus,
+        .select-box:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Placeholder Color */
+        ::placeholder {
+            color: #4b5563;
+        }
+
+        /* Select Arrow Customization */
+        .select-box {
+            appearance: none; /* Removes default arrow */
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.7-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px top 50%;
+            background-size: 12px auto;
+            cursor: pointer;
+        }
+
+        /* ---------------- BUTTON ---------------- */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            background-color: var(--accent);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            font-family: "Poppins", sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        }
+
+        /* ---------------- FOOTER LINKS ---------------- */
+        .register-text {
+            margin-top: 25px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .register-text a {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .register-text a:hover {
+            color: #60a5fa; /* Lighter blue on hover */
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="login-wrapper">
+        <div class="login-card">
+
+            <h3>Welcome Back</h3>
+            <p>Enter your credentials to access the portal.</p>
+
+            <form id="loginForm" method="POST" action="{% url 'log' %}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="input-box" name="email" placeholder="student@college.edu" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="input-box" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="userType">I am a...</label>
+                    <select id="userType" class="select-box" name="role" required>
+                        <option value="" disabled selected>Select Role</option>
+                        <option value="student">Student</option>
+                        <option value="admin">Coordinator / Faculty</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">Login</button>
+
+            </form>
+
+            <p class="register-text">Don't have an account? <a href="{% url 'register' %}">Register Now</a></p>
+        </div>
+    </div>
+
+</body>
+
+</html>

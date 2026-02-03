@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<style>
+/* ================= TITLE ================= */
+
+h3 {
+  color: #f8fafc;
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+
+/* ================= TABLE WRAPPER ================= */
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.45);
+  color: #f8fafc;
+}
+
+/* ================= HEADER ================= */
+
+table th {
+  background-color: #020617;
+  color: #e5e7eb;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid #1e293b;
+}
+
+/* ================= ROWS ================= */
+
+table td {
+  padding: 14px;
+  font-size: 13.5px;
+  color: #94a3b8;
+  border-bottom: 1px solid #1e293b;
+}
+
+/* ================= HOVER EFFECT ================= */
+
+table tr:hover td {
+  background-color: rgba(56, 189, 248, 0.05);
+  color: #e5e7eb;
+  transition: 0.25s ease;
+}
+
+/* ================= LAST ROW FIX ================= */
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ================= EMPTY STATE ================= */
+
+table td[colspan] {
+  text-align: center;
+  padding: 22px;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 640px) {
+  table th,
+  table td {
+    padding: 10px;
+    font-size: 12.5px;
+  }
+}
+</style>
+
+{% endblock %}
+{% block sidebar %}
+<h3>Your Results</h3>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Session</th>
+        <th>Subject</th>
+        <th>Marks</th>
+        <th>Total Marks</th>
+    </tr>
+
+    {% for r in results %}
+    <tr>
+        <td>{{ r.session }}</td>
+        <td>{{ r.subject.name }}</td>
+        <td>{{ r.marks_obtained }}</td>
+        <td>{{ r.total_marks }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4">No results available</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

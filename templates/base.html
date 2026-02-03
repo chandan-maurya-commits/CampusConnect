@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Dashboard | Campus Connect</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+{% block css%}
+{% endblock %}
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* BASE */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color: #fff;
+}
+
+/* GLASS EFFECT */
+.glass {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* WRAPPER */
+.wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+/* SIDEBAR (same as before) */
+.sidebar {
+  width: 240px;
+  padding: 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar h4 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sidebar a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* MAIN (offset restored) */
+.main {
+  margin-left: 240px;        /* 🔑 restores sidebar spacing */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  min-height: 0;             /* 🔑 allows scroll */
+}
+
+/* TOPBAR */
+.topbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 15px;
+  flex-shrink: 0;
+}
+
+.icon-btn {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* CONTENT — ONLY SCROLL AREA */
+.content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;          /* ✅ scrolling here */
+  min-height: 0;
+}
+
+/* SCROLLBAR */
+.content::-webkit-scrollbar {
+  width: 6px;
+}
+.content::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.4);
+  border-radius: 10px;
+}
+
+/* NAV CARD */
+.nav-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+}
+
+/* RIGHT NAV ITEMS */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.nav-right a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.nav-right a:hover {
+  opacity: 0.8;
+}
+
+/* ICON */
+.nav-right i {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar glass">
+    
+    <h4>Campus Connect</h4>
+    <a href="{% url 'student_dashboard' %}">🏠 Dashboard</a>
+    <a href="{% url 'student_attendance' %}">📊 Attendance</a>
+    <a href="{% url 'results' %}">📑 Results</a>
+    <a href="{% url 'std_assignment' %}">📝 Assignments</a>
+    <a href="{% url 'clubs' %}">🎯 Clubs</a>
+    <a href="{% url 'events' %}"">🎉 Events</a>
+    <a href="{% url 'placements' %}">💼 Placements</a>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div id="content" class="content">
+
+  <!-- NAV CARD -->
+  <div class="glass nav-card mb-4">
+    <div class="nav-left">
+      <h5 class="m-0">Dashboard</h5>
+    </div>
+
+    <div class="nav-right">
+      <i class="bi bi-bell"></i>
+      <a href="{% url 'st_profile' %}">Profile</a>
+      <a href="{% url 'about' %}">About Us</a>
+      <a href="{% url 'lout' %}">Logout</a>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT CARD -->
+  {% block sidebar %}
+
+    <!-- CONTENT -->
+    
+    <div id="content" class="content glass">
+      <h3>Welcome, {{std_name}} 👋</h3>
+
+      
+
+    </div>
+    {% endblock %}
+
+  </div>
+</div>
+
+</body>
+</html>
