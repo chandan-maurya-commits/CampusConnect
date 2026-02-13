@@ -68,4 +68,30 @@ CampusConnect/
 ├── manage.py
 └── requirements.txt
 
+## 📸 Screenshots
+
+### Landing Page
+![Landing](screenshots/landing_page.png)
+
+### Login Page
+![Login](screenshots/login.png)
+
+### Student Dashboard
+![Dashboard](screenshots/student_dashboard.png)
+
+## 📈 Future Improvements
+
+- Email notifications
+- Cloud deployment (Render / AWS)
+- Admin analytics dashboard
+- Mobile responsive UI
+- AI-based student activity analysis
+
+## 👨‍💻 Author
+
+Chandan Maurya  
+B.Tech Computer Science & Engineering  
+
+
+
 
