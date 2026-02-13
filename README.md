@@ -60,13 +60,23 @@ python manage.py runserver
 
 ## 📂 Project Structure
 
-```CampusConnect/
+```
+CampusConnect/
 │
 ├── campus/          # Main project configuration
 ├── student/         # Student management app
 ├── templates/       # HTML templates
 ├── manage.py        # Django management script
 └── requirements.txt # Project dependencies
+```
+
+---
+
+## 📸 Screenshots
+
+### 🔹 Landing Page
+![Landing Page](screenshots/landing_page.png)
+
 
 
 ## 📸 Screenshots
