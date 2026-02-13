@@ -72,12 +72,6 @@ CampusConnect/
 
 ---
 
-## 📸 Screenshots
-
-### 🔹 Landing Page
-![Landing Page](screenshots/landing_page.png)
-
-
 
 ## 📸 Screenshots
 
