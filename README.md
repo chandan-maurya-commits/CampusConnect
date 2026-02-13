@@ -37,25 +37,25 @@ Version Control: Git & GitHub
 
 ## ⚙️ Installation & Setup
 
-1. Clone the repository:
+1. Clone the repository - 
 git clone https://github.com/chandan-maurya-commits/CampusConnect.git
 
-2. Navigate into folder: 
+2. Navigate into folder -  
 cd CampusConnect
 
-3. Create virtual environment: 
+3. Create virtual environment - 
 python -m venv env
 
-4. Activate environment: 
+4. Activate environment - 
 env\Scripts\activate
 
-5. Install dependencies: 
+5. Install dependencies - 
 pip install -r requirements.txt
 
-6. Apply migrations: 
+6. Apply migrations - 
 python manage.py migrate
 
-7. Run server: 
+7. Run server -  
 python manage.py runserver
 
 ## 📂 Project Structure
