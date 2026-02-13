@@ -66,7 +66,7 @@ python manage.py runserver
 ├── student/         # Student management app
 ├── templates/       # HTML templates
 ├── manage.py        # Django management script
-└── requirements.txt # Project dependencies```
+└── requirements.txt # Project dependencies
 
 
 ## 📸 Screenshots
